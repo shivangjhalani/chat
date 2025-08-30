@@ -1,29 +1,8 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode } from "react";
 
-export function MessageList({
-  messages,
-  children,
-}: {
-  messages: unknown;
-  children: ReactNode;
-}) {
-  const messageListRef = useRef<HTMLOListElement>(null);
-
-  // Scrolls the list down when new messages
-  // are received or sent.
-  useEffect(() => {
-    if (messageListRef.current) {
-      messageListRef.current.scrollTo({
-        top: messageListRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [messages]);
+export function MessageList({ children }: { children: ReactNode }) {
   return (
-    <ol
-      ref={messageListRef}
-      className="container flex grow flex-col-reverse gap-4 overflow-y-auto px-8 py-4"
-    >
+    <ol className="container flex grow flex-col gap-4 px-8 py-4">
       {children}
     </ol>
   );
