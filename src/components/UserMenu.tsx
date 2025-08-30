@@ -3,14 +3,18 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { ReactNode } from "react";
+import { useAuthActions } from "@convex-dev/auth/react";
 
 export function UserMenu({ children }: { children: ReactNode }) {
+  const { signOut } = useAuthActions();
+
   return (
     <div className="flex items-center gap-2 text-sm font-medium">
       {children}
@@ -28,6 +32,10 @@ export function UserMenu({ children }: { children: ReactNode }) {
             Theme
             <ThemeToggle />
           </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => void signOut()}>
+            Sign out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

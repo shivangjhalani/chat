@@ -30,5 +30,11 @@ Keep in mind for tools : prevent vendor lock in for future, use only open-source
 9. Deployment (Will handle in the end)
 	- Docker compose
 
-## How chatting works
-Send message runs as database transaction (atomic)
+---
+
+## Auth Setup
+Convex password auth setup, have only email & password (have many more options like oauth etc...)
+Wrapped main.tsx (frontend) in ConvexAuthProvider
+Added authtables in schema (authtables is provided by convex)
+Added auth checks in messages queries and mutations
+

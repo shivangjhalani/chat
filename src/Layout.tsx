@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Toaster } from "@/components/ui/toaster";
 
 export function Layout({
   menu,
@@ -20,6 +21,7 @@ export function Layout({
         </nav>
       </header>
       <main className="flex grow flex-col overflow-hidden">{children}</main>
+      <Toaster />
     </div>
   );
 }
