@@ -6,7 +6,7 @@ Keep in mind for tools : prevent vendor lock in for future, use only open-source
 	- Vector DB : Convex
 2. Backend
 	- Convex : Convex is a reactive backend/database where server logic, data schema and API surface live together as TypeScript functions. So no need for a backend yet, will need if workload becomes waayy too much (billions of vectors), not needed rn ig...
-  - I will also not have to deal with websockets since convex provides real time sync using optimized HTTP polling. HTTP long polling has several benifits : Serverless compatibility, Built in reconnection - no need to write disconnection logic for websockets. Websockets is lighter and less latency, but convex should work just fine for chat app.
+  - I will also not have to deal with websockets since convex provides real time sync using either websockets or optimized HTTP polling.
   - Expose the required API endpoints via Convex HTTP actions
 	- tRPC if needed
 3. VectorDB
@@ -29,3 +29,6 @@ Keep in mind for tools : prevent vendor lock in for future, use only open-source
 	- ReactJS + Vite
 9. Deployment (Will handle in the end)
 	- Docker compose
+
+## How chatting works
+Send message runs as database transaction (atomic)
