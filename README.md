@@ -156,14 +156,16 @@ Both embedding generation (staged) and vector searches are implemented as Convex
 ---
 
 ## Part 3
-This architecture, although is very abstracted away, is similar to a backend connected to postgres. The abstraction has very minimal performance overhead compared to if we built an express backend. But this comes with a bunch of QOL and scalability improvements, esp for an app like this which requires real time features.
+This architecture, although is very abstracted away, is similar to a backend connected to postgres. The abstraction has very minimal performance overhead compared to if we built an express backend. But this comes with a bunch of QOL improvements, esp for an app like this which requires real time features.
 
 ### Break point estimation
 
 The most critical part of the app : Database Connection & Query Performance.
 
 #### Primary Limiting Factor: CPU
+
 process data, auth check, DB queries, websocket push etc a lot of work
+
 - Let's assume x ms of CPU time per message consumed
 - Since 2vCPU => 2 * 1000 = 2000 cpu time (ms) / second we have
 - That means our server can serve 2000/x messages a second
@@ -178,14 +180,26 @@ process data, auth check, DB queries, websocket push etc a lot of work
 3. Sockets : depends on system how many open files it allows : ❯ ulimit -n = 1024
 
 ### Bottleneck Identification
+
 Tools -> Prometheus + Grafana: To collect and visualize metrics like request duration, memory usage, and CPU utilization
+
 Application profiling tools also might help reveal bottleneck functions (more cpu time spent on them)
 
 Considering for our app CPU is probably the best guess for bottlneck
+
 Monitor
+
 1. cpu_usage_percent for all cores
 2. load_average_1m/5m/15m
 3. iowait
+
 /proc/stat exposes these 3
 
+#### Scaling
+Horizontal scaling is the straight and easy solution.
 
+Could go either serverless or servers with load balancers (Cool paper : https://www.usenix.org/conference/nsdi24/presentation/wydrowski)
+
+
+
+On application logic layer, heavy loads are already async.
