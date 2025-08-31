@@ -1,3 +1,7 @@
+Test : https://chat-ten-puce-83.vercel.app/
+Start a conversation with : shivang2004jhalani@gmail.com
+Deployed backend on railway
+
 # Setup
 ```
 git clone https://github.com/shivangjhalani/chat.git
@@ -146,5 +150,41 @@ Both embedding generation (staged) and vector searches are implemented as Convex
 
 ## All functions
 <img width="653" height="1500" alt="image" src="https://github.com/user-attachments/assets/b6d96c5e-7ff5-4968-8fa8-001909e46b03" />
+
+
+---
+
+## Part 3
+This architecture, although is very abstracted away, is similar to a backend connected to postgres. The abstraction has very minimal performance overhead compared to if we built an express backend. But this comes with a bunch of QOL and scalability improvements, esp for an app like this which requires real time features.
+
+### Break point estimation
+
+The most critical part of the app : Database Connection & Query Performance.
+
+#### Primary Limiting Factor: CPU
+process data, auth check, DB queries, websocket push etc a lot of work
+- Let's assume x ms of CPU time per message consumed
+- Since 2vCPU => 2 * 1000 = 2000 cpu time (ms) / second we have
+- That means our server can serve 2000/x messages a second
+- A decent assumption might be the CPU takes `5ms per message` => `400 messages a second`
+- Assuming 1 person sends 2 messages a sec. => `200 concurrent users`
+
+#### Other parts
+1. Network : Datacenters have fast internet, even if it is a very conservative 100Mbps, and assuming one message with all protocol overhead is about 1KB, thats a lot of network bandwidth, other parts will bottleneck early.
+
+2. Disk : Assume 3000 IOPS and 2 IOPS/message: 3000 ÷ 2 = 1500 msg/sec
+
+3. Sockets : depends on system how many open files it allows : ❯ ulimit -n = 1024
+
+### Bottleneck Identification
+Tools -> Prometheus + Grafana: To collect and visualize metrics like request duration, memory usage, and CPU utilization
+Application profiling tools also might help reveal bottleneck functions (more cpu time spent on them)
+
+Considering for our app CPU is probably the best guess for bottlneck
+Monitor
+1. cpu_usage_percent for all cores
+2. load_average_1m/5m/15m
+3. iowait
+/proc/stat exposes these 3
 
 
