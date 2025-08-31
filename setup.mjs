@@ -1,17 +1,24 @@
-try {
-  const envContent = readFileSync(resolve(".env.local"), "utf8");
-  const coApiKeyMatch = envContent.match(/^CO_API_KEY=(.+)$/m);
+import { execSync, spawnSync } from "child_process";
+import { readFileSync, writeFileSync } from "fs";
+import { resolve } from "path";
 
-  if (coApiKeyMatch) {
-    const coApiKey = coApiKeyMatch[1].trim();
-    execSync(`npx convex env set CO_API_KEY "${coApiKey}"`, { stdio: 'inherit' });
-    console.log("CO_API_KEY set successfully");
-  } else {
-    console.warn("CO_API_KEY not found in .env.local");
-  }
+const envLocalContent = `# put in .env.local to have \`npx convex dev\` work automatically
+CONVEX_SELF_HOSTED_URL='http://127.0.0.1:3210'
+CONVEX_SELF_HOSTED_ADMIN_KEY=''
+
+
+VITE_CONVEX_URL=http://127.0.0.1:3210
+CO_API_KEY=
+`;
+
+try {
+  writeFileSync(resolve(".env.local"), envLocalContent);
+  console.log("✔ Successfully created .env.local");
 } catch (error) {
-  console.warn("Could not read .env.local file:", error.message);
+    console.error("❌ Failed to create .env.local:", error.message);
+    process.exit(1);
 }
+
 // Set up self-hosted Convex configuration
 execSync(`npx convex env set CONVEX_SELF_HOSTED_URL "http://localhost:3210"`, { stdio: 'inherit' });
 console.log("CONVEX_SELF_HOSTED_URL set to http://localhost:3210");
@@ -26,6 +33,16 @@ try {
   if (adminKey) {
     execSync(`npx convex env set CONVEX_SELF_HOSTED_ADMIN_KEY "${adminKey}"`, { stdio: 'inherit' });
     console.log("CONVEX_SELF_HOSTED_ADMIN_KEY set successfully");
+
+    // Update .env.local with the new admin key
+    const envContent = readFileSync(resolve(".env.local"), "utf8");
+    const updatedEnvContent = envContent.replace(
+      /^CONVEX_SELF_HOSTED_ADMIN_KEY='.*'$/m,
+      `CONVEX_SELF_HOSTED_ADMIN_KEY='${adminKey}'`
+    );
+    writeFileSync(resolve(".env.local"), updatedEnvContent);
+    console.log("✔ Successfully updated .env.local with admin key");
+
   } else {
     console.warn("Failed to generate admin key");
   }
@@ -35,9 +52,6 @@ try {
 }
 
 import { exportJWK, exportPKCS8, generateKeyPair } from "jose";
-import { execSync, spawnSync } from "child_process";
-import { readFileSync } from "fs";
-import { resolve } from "path";
 
 const keys = await generateKeyPair("RS256", {
   extractable: true,
