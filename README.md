@@ -18,6 +18,7 @@ Keep in mind for tools : prevent vendor lock in for future, use only open-source
 	- Clerk : Managed, easy compared to other options, convex has nice integration with clerk
 4. Backend Host
 	- Vercel : love fluid compute
+  - Or Fly.io
 5. DB Host
 	- Self Host convex
 	- Use convex cloud (for now use convex cloud, will self host later)
