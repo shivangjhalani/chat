@@ -15,6 +15,9 @@ cp .env.local.example .env.local
 docker compose exec backend ./generate_admin_key.sh # Get the key and put in .env.local
 npx convex dev # start new project if prompted
 node setup.mjs
+
+npm install -g pnpm
+
 pnpm run dev
 ```
 
