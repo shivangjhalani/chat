@@ -51,12 +51,13 @@ Keep in mind for tools : prevent vendor lock in for future, use only open-source
 4. Backend Host
 	- Vercel : love fluid compute
   - Or Fly.io
+  - Or Railwiy
 5. DB Host
 	- Self Host convex
-	- Use convex cloud (for now use convex cloud, will self host later)
-6. Analytics (not to be included right now)
+	- Use convex cloud
+6. Analytics (if)
 	- PostHog : OSS
-7. Captcha / Ratelimiting (not to be included right now)
+7. Captcha / Ratelimiting (if)
 	- Vercel Bot ID
 8. FrontEnd
 	- ReactJS + Vite
