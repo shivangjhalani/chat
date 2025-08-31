@@ -50,6 +50,9 @@ importers:
       convex:
         specifier: ^1.26.0
         version: 1.26.2(react@18.3.1)
+      jose:
+        specifier: ^6.1.0
+        version: 6.1.0
       next-themes:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2196,6 +2199,9 @@ packages:
 
   jose@5.10.0:
     resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
+
+  jose@6.1.0:
+    resolution: {integrity: sha512-TTQJyoEoKcC1lscpVDCSsVgYzUDg/0Bt3WE//WiTPK6uOCQC2KZS4MpugbMWt/zyjkopgZoXhZuCi00gLudfUA==}
 
   js-base64@3.7.7:
     resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
@@ -5547,6 +5553,8 @@ snapshots:
   jiti@1.21.7: {}
 
   jose@5.10.0: {}
+
+  jose@6.1.0: {}
 
   js-base64@3.7.7: {}
 
