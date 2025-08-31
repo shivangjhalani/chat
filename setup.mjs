@@ -1,6 +1,10 @@
 import { spawnSync } from "child_process";
+import { config } from "dotenv";
 
 import { exportJWK, exportPKCS8, generateKeyPair } from "jose";
+
+// Load environment variables from .env.local
+config({ path: ".env.local" });
 
 const keys = await generateKeyPair("RS256", {
   extractable: true,
@@ -25,3 +29,13 @@ const jwksResult = spawnSync("npx", ["convex", "env", "set", `JWKS=${jwks}`], {
 const siteUrlResult = spawnSync("npx", ["convex", "env", "set", "SITE_URL=http://localhost:5173"], {
   stdio: "inherit",
 });
+
+// Set CO_API_KEY from .env.local
+const coApiKey = process.env.CO_API_KEY;
+if (coApiKey) {
+  const coApiKeyResult = spawnSync("npx", ["convex", "env", "set", `CO_API_KEY=${coApiKey}`], {
+    stdio: "inherit",
+  });
+} else {
+  console.warn("Warning: CO_API_KEY not found in .env.local");
+}

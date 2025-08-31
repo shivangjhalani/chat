@@ -15,7 +15,7 @@ sudo apt-get install -y nodejs
 sudo apt install docker-compose-v2
 
 docker compose up # Opens up convex backend connected to postgres
-cp .env.local.example .env.local
+cp .env.local.example .env.local # Update cohere api key
 docker compose exec backend ./generate_admin_key.sh # Get the key and put in .env.local
 npx convex dev # start new project if prompted
 node setup.mjs
@@ -141,7 +141,7 @@ Both embedding generation (staged) and vector searches are implemented as Convex
 - Used cohere API and typescript SDK for generating embeddings at time of storing messages and vector ann (cosine similarity) search.
 - Vector search and storage pretty much follows the convex docs.
 
-- Scaling : Convex is very serverless friendly, we can shard the vectordb. Convex doesn't seem to support sharding. 2 options, either use a seperate vectordb like qdrant, or can hack it and logically split data across multiple Convex tables/deployments.
+- Scaling : Convex is scalable, we can shard the vectordb. Convex doesn't seem to support sharding. 2 options, either use a seperate vectordb like qdrant, or can hack it and logically split data across multiple Convex tables/deployments.
 
 ---
 
@@ -203,7 +203,7 @@ Monitor
 #### Scaling
 Horizontal scaling is the straight and easy solution.
 
-Could go either serverless or servers with load balancers (Cool paper : https://www.usenix.org/conference/nsdi24/presentation/wydrowski)
+Could go either serverless(might not be good for long lived websockets) or servers with load balancers (Cool paper : https://www.usenix.org/conference/nsdi24/presentation/wydrowski)
 
 
 
