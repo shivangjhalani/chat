@@ -30,6 +30,11 @@ App : http://localhost:5173
 
 ---
 
+<img width="1920" height="479" alt="image" src="https://github.com/user-attachments/assets/21157b21-90cc-4f4d-a53a-775bd7f01d17" />
+<img width="1920" height="479" alt="image" src="https://github.com/user-attachments/assets/30653e80-f966-475f-8d05-6900b5577ff1" />
+
+---
+
 # Architecting
 ## Tech stack choice (Tentative)
 Keep in mind for tools : prevent vendor lock in for future, use only open-source
