@@ -19,10 +19,6 @@ try {
     process.exit(1);
 }
 
-// Set up self-hosted Convex configuration
-execSync(`npx convex env set CONVEX_SELF_HOSTED_URL "http://localhost:3210"`, { stdio: 'inherit' });
-console.log("CONVEX_SELF_HOSTED_URL set to http://localhost:3210");
-
 try {
   console.log("Generating admin key for self-hosted Convex...");
   const adminKey = execSync('docker compose exec backend ./generate_admin_key.sh', {
