@@ -5,9 +5,6 @@ import { resolve } from "path";
 const envLocalContent = `# put in .env.local to have \`npx convex dev\` work automatically
 CONVEX_SELF_HOSTED_URL='http://127.0.0.1:3210'
 CONVEX_SELF_HOSTED_ADMIN_KEY=''
-
-
-VITE_CONVEX_URL=http://127.0.0.1:3210
 CO_API_KEY=
 `;
 
