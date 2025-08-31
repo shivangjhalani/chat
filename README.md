@@ -1,3 +1,28 @@
+# Setup
+```
+git clone https://github.com/shivangjhalani/chat.git
+cd chat
+
+# install node
+curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# install docker
+sudo apt install docker-compose-v2
+
+docker compose up # Opens up convex backend connected to postgres
+cp .env.local.example .env.local
+docker compose exec backend ./generate_admin_key.sh # Get the key and put in .env.local
+npx convex dev # start new project if prompted
+node setup.mjs
+pnpm run dev
+```
+
+Dashboard : http://localhost:6791
+App : http://localhost:5173
+
+---
+
 # Architecting
 ## Tech stack choice (Tentative)
 Keep in mind for tools : prevent vendor lock in for future, use only open-source
