@@ -35,6 +35,8 @@ App : http://localhost:5173
 
 ---
 
+> The following are just notes for self while building
+
 # Architecting
 ## Tech stack choice (Tentative)
 1. DB
@@ -45,8 +47,6 @@ App : http://localhost:5173
 	- I will also not have to deal with websockets since convex provides real time sync using either websockets or optimized HTTP polling.
 	- Expose the required API endpoints via Convex HTTP actions
 	- tRPC if needed
-3. VectorDB
-  - Cohere Embeddings
 3. Auth (not yet decided)
 	- Not setting up my own auth
 	- Convex Auth : Inbuilt auth, easiest (Using this)
@@ -54,8 +54,8 @@ App : http://localhost:5173
 	- Clerk : Managed, easy compared to other options, convex has nice integration with clerk
 4. Backend Host
 	- Vercel : love fluid compute
-  - Or Fly.io
-  - Or Railwiy
+	- Or Fly.io
+	- Or Railwiy
 5. DB Host
 	- Self Host convex
 	- Use convex cloud
@@ -127,7 +127,7 @@ Both embedding generation (staged) and vector searches are implemented as Convex
 
 ## Backend
 
-- All query/mutation/action start with `requireAuth()`
+- Most query/mutation/action start with `requireAuth()`
 - User-facing mutations like `sendMessage` are fast - Expensive stuff (in terms of time) (embedding generation etc.) happens async in bkg.
 - All the heavy queries use indexes - user lookup by email, conversations by participants, messages by conversation+time.
 - Vector searches filtered by conversation for security + speed.
@@ -136,16 +136,15 @@ Both embedding generation (staged) and vector searches are implemented as Convex
 ---
 
 ## Vector
-- Chose convex vector storage, since everything convex this also convex, it currently efficiently supports vectors in the order of millions, more than enough for school chats + we are never vector searching through the whole vector db.
-- Used cohere API and typescript SDK for generating embeddings at time of storing messages and vector ann (cosine similarity) search.
-- Vector search and storage pretty much follows the convex docs.
-
-- Scaling : Convex is scalable, we can shard the vectordb. Convex doesn't seem to support sharding. 2 options, either use a seperate vectordb like qdrant, or can hack it and logically split data across multiple Convex tables/deployments.
+- Chose convex vector storage, since everything is convex, this also convex, it currently efficiently supports vectors in the order of millions, more than enough for school chats + we are never vector searching through the whole vector db.
+- Used cohere API and its typescript SDK for generating embeddings at time of storing messages and vector ann (cosine similarity) search.
+- Vector search and storage pretty much follow the convex docs.
+- Scaling : Convex is scalable, we could shard the vectordb but Convex doesn't seem to support sharding. 2 options, either use a seperate vectordb like qdrant, or can hack it and logically split data across multiple Convex tables/deployments.
 
 ---
 
 ## Auth Setup
-- Convex password auth setup, have only email & password (have many more options like oauth, magic links etc...)
+- Convex password auth setup, only email & password (has many more options like oauth, magic links etc... can be easily integrated)
 - Convex Auth issues JWT access tokens and refresh tokens (one refresh token used once. On reissue of JWT, another pair of JWT and refresh is sent). The access token is sent over the WebSocket connection to the backend for authentication. Are stored in localStorage for persistence.
 - Wrapped main.tsx (frontend) in ConvexAuthProvider
 - Added authtables in schema (authtables is provided by convex)
@@ -203,7 +202,5 @@ Monitor
 Horizontal scaling is the straight and easy solution.
 
 Could go either serverless(might not be good for long lived websockets) or servers with load balancers (Cool paper : https://www.usenix.org/conference/nsdi24/presentation/wydrowski)
-
-
 
 On application logic layer, heavy loads are already async.
