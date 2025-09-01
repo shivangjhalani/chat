@@ -159,7 +159,7 @@ Both embedding generation (staged) and vector searches are implemented as Convex
 
 ---
 
-## Part 3
+## Analysis
 This architecture, although is very abstracted away, is similar to a backend connected to postgres. The abstraction has very minimal performance overhead compared to if we built an express backend. But this comes with a bunch of QOL improvements, esp for an app like this which requires real time features.
 
 ### Break point estimation
