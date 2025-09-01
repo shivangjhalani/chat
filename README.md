@@ -14,12 +14,12 @@ sudo apt-get install -y nodejs
 # install docker
 sudo apt install docker-compose-v2
 
-docker compose up # Opens up convex backend connected to postgres
+docker compose up # Opens up convex backend connected to postgres, leave this open, proceed to another terminal
 cp .env.local.example .env.local # Update cohere api key
 docker compose exec backend ./generate_admin_key.sh # Get the key and put in .env.local
 npm install -g pnpm
 pnpm i
-npx convex dev
+npx convex dev # Run once and close
 node setup.mjs
 
 pnpm run dev
