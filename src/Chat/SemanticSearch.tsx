@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Id } from "../../convex/_generated/dataModel";
+import { Spinner } from "@/components/Spinner";
 
 type SearchResult = {
   messageId: Id<"messages">;
@@ -67,7 +68,10 @@ export function SemanticSearch() {
       </div>
 
       {isSearching && (
-        <div className="text-sm text-muted-foreground">Searching...</div>
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <Spinner className="h-4 w-4" />
+          Searching...
+        </div>
       )}
 
       {results.length > 0 && (

@@ -24,7 +24,7 @@ export function SignInWithPassword({
   const [submitting, setSubmitting] = useState(false);
   return (
     <form
-      className="flex flex-col"
+      className="flex flex-col gap-3"
       onSubmit={(event) => {
         event.preventDefault();
         setSubmitting(true);
@@ -53,10 +53,12 @@ export function SignInWithPassword({
           });
       }}
     >
-      <label htmlFor="email">Email</label>
-      <Input name="email" id="email" className="mb-4" autoComplete="email" />
+      <div className="space-y-1">
+        <label htmlFor="email" className="text-sm font-medium">Email</label>
+        <Input name="email" id="email" autoComplete="email" placeholder="you@example.com" />
+      </div>
       <div className="flex items-center justify-between">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className="text-sm font-medium">Password</label>
         {handlePasswordReset && flow === "signIn" ? (
           <Button
             className="p-0 h-auto"
@@ -73,6 +75,7 @@ export function SignInWithPassword({
         name="password"
         id="password"
         autoComplete={flow === "signIn" ? "current-password" : "new-password"}
+        placeholder={flow === "signIn" ? "Your password" : "Create a strong password"}
       />
       {flow === "signUp" && passwordRequirements !== null && (
         <span className="text-gray-500 font-thin text-sm">
@@ -81,7 +84,7 @@ export function SignInWithPassword({
       )}
       {flow === "signUp" && customSignUp}
       <input name="flow" value={flow} type="hidden" />
-      <Button type="submit" disabled={submitting} className="mt-4">
+      <Button type="submit" disabled={submitting} className="mt-2">
         {flow === "signIn" ? "Sign in" : "Sign up"}
       </Button>
       <Button

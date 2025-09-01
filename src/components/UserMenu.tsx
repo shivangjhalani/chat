@@ -1,4 +1,3 @@
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -27,11 +26,6 @@ export function UserMenu({ children }: { children: ReactNode }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>{children}</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuLabel className="flex items-center gap-2 py-0 font-normal">
-            Theme
-            <ThemeToggle />
-          </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => void signOut()}>
             Sign out

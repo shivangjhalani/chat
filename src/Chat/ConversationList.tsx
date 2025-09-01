@@ -33,14 +33,14 @@ export function ConversationList({
   }, [conversations, search]);
 
   return (
-    <div className="flex h-full flex-col border-r">
+    <div className="flex h-full flex-col" aria-label="Conversation sidebar">
       <Tabs defaultValue="conversations" className="h-full flex flex-col">
         <div className="p-3 flex gap-2">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid w-full grid-cols-2" aria-label="Sidebar tabs">
             <TabsTrigger value="conversations">Chats</TabsTrigger>
             <TabsTrigger value="search">Search</TabsTrigger>
           </TabsList>
-          <Button onClick={onOpenNewConversation} size="sm">New</Button>
+          <Button onClick={onOpenNewConversation} size="sm" aria-label="Start new conversation">New</Button>
         </div>
 
         <div className="flex-1 overflow-hidden">
@@ -50,22 +50,24 @@ export function ConversationList({
                 placeholder="Search people..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                aria-label="Search conversations"
               />
             </div>
             <div className="flex-1 overflow-y-auto">
-              <ul className="divide-y">
+              <ul className="space-y-1 px-2" role="listbox" aria-label="Conversations">
                 {filtered?.map((c) => {
                   const title = c.participantDetails.map((p) => p.name || p.email).join(", ");
                   const isSelected = selectedConversationId === c._id;
                   return (
-                    <li key={c._id}>
+                    <li key={c._id} role="option" aria-selected={isSelected}>
                       <button
-                        className={`w-full text-left px-4 py-3 hover:bg-muted ${
+                        className={`w-full text-left rounded-lg px-4 py-3 hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${
                           isSelected ? "bg-muted" : ""
                         }`}
                         onClick={() => onSelectConversation(c._id)}
+                        aria-current={isSelected ? "page" : undefined}
                       >
-                        <div className="font-medium">{title}</div>
+                        <div className="font-medium truncate">{title}</div>
                       </button>
                     </li>
                   );

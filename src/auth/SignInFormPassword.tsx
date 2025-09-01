@@ -1,14 +1,18 @@
 import { SignInWithPassword } from "@/auth/SignInWithPassword";
-import { Toaster } from "@/components/ui/toaster";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export function SignInFormPassword() {
   return (
-    <div className="max-w-[384px] mx-auto flex flex-col gap-4">
-      <h2 className="font-semibold text-2xl tracking-tight">
-        Sign in or create an account
-      </h2>
-      <SignInWithPassword />
-      <Toaster />
+    <div className="container flex items-center justify-center min-h-[60vh]">
+      <Card className="w-full max-w-[420px]">
+        <CardHeader>
+          <CardTitle className="text-2xl">Welcome back</CardTitle>
+          <CardDescription>Sign in or create an account</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <SignInWithPassword />
+        </CardContent>
+      </Card>
     </div>
   );
 }

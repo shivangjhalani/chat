@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Layout({
   menu,
@@ -17,7 +18,10 @@ export function Layout({
               <h1 className="text-base font-semibold">Chat</h1>
             </a>
           </div>
-          {menu}
+          <div className="flex items-center gap-2">
+            {menu}
+            <ThemeToggle />
+          </div>
         </nav>
       </header>
       <main className="flex grow flex-col overflow-hidden">{children}</main>
