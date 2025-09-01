@@ -37,7 +37,6 @@ App : http://localhost:5173
 
 # Architecting
 ## Tech stack choice (Tentative)
-Keep in mind for tools : prevent vendor lock in for future, use only open-source
 1. DB
 	- Convex (Postgres) : OSS (both selfhostable and DBaaS (offers much more than just DB)) and Built on top of planetscale postgres
 	- Vector DB : Convex
