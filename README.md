@@ -30,8 +30,9 @@ App : http://localhost:5173
 
 ---
 
-<img width="1920" height="479" alt="image" src="https://github.com/user-attachments/assets/21157b21-90cc-4f4d-a53a-775bd7f01d17" />
-<img width="1920" height="479" alt="image" src="https://github.com/user-attachments/assets/30653e80-f966-475f-8d05-6900b5577ff1" />
+<img width="2874" height="1470" alt="image" src="https://github.com/user-attachments/assets/60d6d671-0f0f-4120-9390-8659c34acd8b" />
+<img width="2874" height="1470" alt="image" src="https://github.com/user-attachments/assets/b0964e39-5215-470c-b772-f79e1a3646dc" />
+
 
 ---
 
