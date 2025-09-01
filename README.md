@@ -1,5 +1,7 @@
-Test : https://chat-ten-puce-83.vercel.app/
+Test : https://chat-ten-puce-83.vercel.app/ `choose a strong password`
+
 Start a conversation with : shivang2004jhalani@gmail.com
+
 Deployed backend on railway
 
 # Setup
